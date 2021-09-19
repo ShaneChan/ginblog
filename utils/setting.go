@@ -1,0 +1,45 @@
+package utils
+
+import (
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
+	"gopkg.in/ini.v1"
+	"os"
+)
+
+var (
+	AppMode  string
+	HttpPort string
+
+	Db         string
+	DbHost     string
+	DbPort     string
+	DbUser     string
+	DbPassword string
+	DbName     string
+)
+
+func init() {
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stdout})
+	file, err := ini.Load("config/config.ini")
+	if err != nil {
+		log.Fatal().Msgf("配置文件读取错误，请检查文件路径:", err)
+	}
+
+	loadServer(file)
+	loadData(file)
+}
+
+func loadServer(file *ini.File) {
+	AppMode = file.Section("server").Key("AppMode").MustString("debug")
+	HttpPort = file.Section("server").Key("HttpPort").MustString(":3000")
+}
+
+func loadData(file *ini.File) {
+	Db = file.Section("database").Key("Db").MustString("debug")
+	DbHost = file.Section("database").Key("DbHost").MustString("localhost")
+	DbPort = file.Section("database").Key("DbPort").MustString(":3306")
+	DbUser = file.Section("database").Key("DbUser").MustString("ginblog")
+	DbPassword = file.Section("database").Key("DbPassword").MustString("admin123")
+	DbName = file.Section("database").Key("DbName").MustString("ginblog")
+}

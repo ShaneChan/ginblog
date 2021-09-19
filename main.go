@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "ginblog/routes"
 
 func main() {
-	fmt.Println("hello world")
+	routes.InitRouter()
 }
