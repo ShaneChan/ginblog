@@ -76,7 +76,7 @@ func EditCategory(c *gin.Context) {
 // DeleteCategory 删除分类
 func DeleteCategory(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	code = model.DeleteUser(id)
+	code = model.DeleteCategory(id)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
