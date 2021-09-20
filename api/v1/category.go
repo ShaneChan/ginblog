@@ -18,7 +18,7 @@ func AddCategory(c *gin.Context) {
 	var data model.Category
 	_ = c.ShouldBindJSON(&data)
 
-	code = model.CheckUser(data.Name)
+	code = model.CheckCategory(data.Name)
 
 	if code == errmsg.SUCCESS {
 		model.CreateCategory(&data)

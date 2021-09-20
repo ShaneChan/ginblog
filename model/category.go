@@ -26,7 +26,7 @@ func CreateCategory(data *Category) int {
 // CheckCategory 查询分类是否存在
 func CheckCategory(name string) int {
 	var category Category
-	db.Select("id").Where("username = ?", name).First(&category)
+	db.Select("id").Where("name = ?", name).First(&category)
 
 	if category.ID > 0 {
 		return errmsg.ERROR_USERNAME_USED
