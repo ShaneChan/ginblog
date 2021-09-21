@@ -17,6 +17,7 @@ func InitRouter() {
 		// 分类模块的路由接口
 		routeCategory(router)
 		// 文章模块的路由接口
+		routeArticle(router)
 	}
 
 	r.Run(utils.HttpPort)
@@ -36,4 +37,14 @@ func routeCategory(router *gin.RouterGroup) {
 	router.GET("category", v1.GetCategory)
 	router.PUT("category/:id", v1.EditCategory)
 	router.DELETE("category/:id", v1.DeleteCategory)
+}
+
+// 文章路由
+func routeArticle(router *gin.RouterGroup) {
+	router.POST("article/add", v1.AddArticle)
+	router.GET("article", v1.GetArticle)
+	router.GET("article/catelist", v1.GetCategoryArticle)
+	router.GET("article/info/:id", v1.GetArticleInfo)
+	router.PUT("article/:id", v1.EditArticle)
+	router.DELETE("article/:id", v1.DeleteArticle)
 }
